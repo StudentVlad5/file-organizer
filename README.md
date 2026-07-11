@@ -2,7 +2,7 @@
 
 A command-line interface (CLI) utility for analyzing, sorting, finding duplicates, and cleaning up the file system. It is written in Node.js and utilizes an event- and stream-based architecture to efficiently handle large files.
 
-## Features
+## 1. Technical Features and Architecture
 
 ### Recursive directory scanning with detailed statistics:
 
@@ -35,18 +35,24 @@ A command-line interface (CLI) utility for analyzing, sorting, finding duplicate
 
 - Built with Node.js EventEmitter
 - Each CLI command is implemented as a separate class with progress events
+- Each module is a distinct class extending `EventEmitter` that emits progress events. These events are consumed by the CLI to render a dynamic ASCII progress bar (████░░░░) in the console.
 
 ### Robust error handling:
 
 - Uses try...catch for all file operations
 - Handles filesystem errors with descriptive messages based on error codes
+- The program checks for specific Node.js system error codes (e.g., ENOENT for non-existent folders, EACCES for locked files or folders lacking access rights) and outputs informative messages, terminates the process with exit code 1.
 
-## Efficient processing of large files:
+### Efficient processing of large files:
 
 - Uses Node.js Streams for files larger than 10 MB
 - Avoids loading large files entirely into memory
 
-## Project structure
+### Memory Efficiency
+
+File reading for hash calculations and the copying of files larger than 10 MB are implemented using `fs.createReadStream()` and `fs.createWriteStream()` data streams. This prevents loading large volumes of data into RAM.
+
+## 2. Project structure
 
 ```bash
 file-organizer/
@@ -62,7 +68,7 @@ file-organizer/
     └── cleanup.js
 ```
 
-## Installation instructions
+## 3. Installation instructions
 
 Ensure that Node.js (version 16 or higher) is installed.
 Create a project folder and move the files into it, following the required structure.
@@ -72,11 +78,11 @@ Run the initialization command in the terminal (at the root of the project folde
 npm install
 ```
 
-## Usage and command examples
+## 4. Usage and command examples
 
 You can run commands in two ways: using `npm run <command> -- <arguments>` or directly via Node.js using `node file-organizer.js`. To avoid issues with paths containing spaces, enclose such paths in quotation marks.
 
-### 1. scan - Directory Analysis
+### Scan - Directory Analysis
 
 Recursively traverses the specified directory and gathers statistics including the file count, total size, file types, modification age distribution, the three largest files, and the oldest file.
 
@@ -92,7 +98,7 @@ Example:
 node file-organizer.js scan "C:\Users\User\Downloads"
 ```
 
-### 2. duplicates - Duplicate Detection
+### duplicates - Duplicate Detection
 
 It searches for files with identical content by calculating SHA-256 hashes using read streams, which avoids overloading system memory with large files. It displays information about duplicate groups and calculates the amount of wasted disk space.
 
@@ -108,7 +114,7 @@ Example:
 node file-organizer.js duplicates "C:\Users\User\Downloads"
 ```
 
-### 3. organize - File Organization
+### organize - File Organization
 
 Copies files from the source directory to the destination directory while preserving the originals, automatically sorting them into categories: Documents, Images, Archives, Code, Videos, and Other.
 Small files (<10 MB) are copied using the system method.
@@ -127,7 +133,7 @@ Example:
 node file-organizer.js organize "C:\Users\User\Downloads" --output "C:\Users\User\Desktop\Organized"
 ```
 
-### 4. cleanup - Cleanup
+### cleanup - Cleanup
 
 Finds files older than a specified number of days (based on their last modification time (mtime)).
 
@@ -139,19 +145,19 @@ node file-organizer.js cleanup "<path>" --older-than <number_of_days> [--confirm
 
 Example:
 
-#### View-only (Dry run)
+View-only (Dry run)
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90
 ```
 
-#### Actual removal
+Actual removal
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confirm
 ```
 
-## Technologies
+## 5. Technologies
 
 Node.js
 File System (fs)
@@ -161,20 +167,6 @@ Crypto (SHA-256)
 Events (EventEmitter)
 JavaScript (ES6+)
 
-## Technical Features and Architecture
-
-### Event-Driven Architecture
-
-The business logic for each command is completely decoupled from the information display (interface). Each module is a distinct class extending `EventEmitter` that emits progress events. These events are consumed by the CLI to render a dynamic ASCII progress bar (████░░░░) in the console.
-
-### Memory Efficiency
-
-File reading for hash calculations and the copying of files larger than 10 MB are implemented using `fs.createReadStream()` and `fs.createWriteStream()` data streams. This prevents loading large volumes of data into RAM.
-
-### Error Handling
-
-File operations are wrapped in try...catch blocks. The program checks for specific Node.js system error codes (e.g., ENOENT for non-existent folders, EACCES for locked files or folders lacking access rights) and outputs informative messages, terminates the process with exit code 1.
-
-## License
+## 6. License
 
 This project is intended for educational purposes.
