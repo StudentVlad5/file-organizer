@@ -48,10 +48,6 @@ A command-line interface (CLI) utility for analyzing, sorting, finding duplicate
 - Uses Node.js Streams for files larger than 10 MB
 - Avoids loading large files entirely into memory
 
-### Memory Efficiency
-
-File reading for hash calculations and the copying of files larger than 10 MB are implemented using `fs.createReadStream()` and `fs.createWriteStream()` data streams. This prevents loading large volumes of data into RAM.
-
 ## 2. Project structure
 
 ```bash
@@ -82,7 +78,7 @@ npm install
 
 You can run commands in two ways: using `npm run <command> -- <arguments>` or directly via Node.js using `node file-organizer.js`. To avoid issues with paths containing spaces, enclose such paths in quotation marks.
 
-### Scan - Directory Analysis
+### scan - Directory Analysis
 
 Recursively traverses the specified directory and gathers statistics including the file count, total size, file types, modification age distribution, the three largest files, and the oldest file.
 
@@ -159,13 +155,13 @@ node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confi
 
 ## 5. Technologies
 
-Node.js
-File System (fs)
-Streams
-Path
-Crypto (SHA-256)
-Events (EventEmitter)
-JavaScript (ES6+)
+- Node.js
+- File System (fs)
+- Streams
+- Path
+- Crypto (SHA-256)
+- Events (EventEmitter)
+- JavaScript (ES6+)
 
 ## 6. License
 
