@@ -109,11 +109,11 @@ node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confi
 
 ## Technical Features and Architecture
 
-### Error Handling
+### Event-Driven Architecture
 
 The business logic for each command is completely decoupled from the information display (interface). Each module is a distinct class extending `EventEmitter` that emits progress events. These events are consumed by the CLI to render a dynamic ASCII progress bar (████░░░░) in the console.
 
-### Error Handling
+### Memory Efficiency
 
 File reading for hash calculations and the copying of files larger than 10 MB are implemented using `fs.createReadStream()` and `fs.createWriteStream()` data streams. This prevents loading large volumes of data into RAM.
 
