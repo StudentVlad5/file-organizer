@@ -7,10 +7,10 @@
   "main": "index.js",
   "proxy": "http://127.0.0.1:5000/",
   "scripts": {
-    "scan": "node file-organizer.js scan C:\\Users\\Vlad\\Downloads",
-    "duplicates": "node file-organizer.js duplicates C:\\Users\\Vlad\\Downloads",
-    "organize": "node file-organizer.js organize C:\\Users\\Vlad\\Downloads --output C:\\Users\\Vlad\\Desktop\\Organized",
-    "cleanup": "node file-organizer.js cleanup C:\\Users\\Vlad\\Downloads older-than 90 --confirm"
+    "scan": "node file-organizer.js scan",
+    "duplicates": "node file-organizer.js duplicates",
+    "organize": "node file-organizer.js organize",
+    "cleanup": "node file-organizer.js cleanup"
   },
   "keywords": [
     "node",

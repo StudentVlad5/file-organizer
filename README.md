@@ -91,13 +91,13 @@ node file-organizer.js cleanup "<path>" --older-than <number_of_days> [--confirm
 
 Example:
 
-# View-only (Dry run)
+### View-only (Dry run)
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90
 ```
 
-# Actual removal
+### Actual removal
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confirm
