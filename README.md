@@ -2,6 +2,50 @@
 
 A command-line interface (CLI) utility for analyzing, sorting, finding duplicates, and cleaning up the file system. It is written in Node.js and utilizes an event- and stream-based architecture to efficiently handle large files.
 
+## Features
+
+### Recursive directory scanning with detailed statistics:
+
+- Total number of files
+- File sizes
+- File types
+- File age analysis
+
+### Duplicate file detection:
+
+- Calculates SHA-256 hashes
+- Identifies files with identical content regardless of filename
+- Automatic file organization
+
+### Copies and sorts files into categorized folders:
+
+- Documents
+- Images
+- Archives
+- Code
+- Videos
+- Other
+
+### Directory cleanup:
+
+- Finds files older than a specified number of days
+- Supports Dry Run mode for previewing files before deletion
+
+### Event-driven architecture:
+
+- Built with Node.js EventEmitter
+- Each CLI command is implemented as a separate class with progress events
+
+### Robust error handling:
+
+- Uses try...catch for all file operations
+- Handles filesystem errors with descriptive messages based on error codes
+
+## Efficient processing of large files:
+
+- Uses Node.js Streams for files larger than 10 MB
+- Avoids loading large files entirely into memory
+
 ## Project structure
 
 ```bash
@@ -107,6 +151,16 @@ node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confirm
 ```
 
+## Technologies
+
+Node.js
+File System (fs)
+Streams
+Path
+Crypto (SHA-256)
+Events (EventEmitter)
+JavaScript (ES6+)
+
 ## Technical Features and Architecture
 
 ### Event-Driven Architecture
@@ -120,3 +174,7 @@ File reading for hash calculations and the copying of files larger than 10 MB ar
 ### Error Handling
 
 File operations are wrapped in try...catch blocks. The program checks for specific Node.js system error codes (e.g., ENOENT for non-existent folders, EACCES for locked files or folders lacking access rights) and outputs informative messages, terminates the process with exit code 1.
+
+## License
+
+This project is intended for educational purposes.
