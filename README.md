@@ -32,8 +32,9 @@ npm install
 
 You can run commands in two ways: using `npm run <command> -- <arguments>` or directly via Node.js using `node file-organizer.js`. To avoid issues with paths containing spaces, enclose such paths in quotation marks.
 
-1. scan - Directory Analysis
-   Recursively traverses the specified directory and gathers statistics including the file count, total size, file types, modification age distribution, the three largest files, and the oldest file.
+### 1. scan - Directory Analysis
+
+Recursively traverses the specified directory and gathers statistics including the file count, total size, file types, modification age distribution, the three largest files, and the oldest file.
 
 Syntax:
 
@@ -47,8 +48,9 @@ Example:
 node file-organizer.js scan "C:\Users\User\Downloads"
 ```
 
-2. duplicates - Duplicate Detection
-   It searches for files with identical content by calculating SHA-256 hashes using read streams, which avoids overloading system memory with large files. It displays information about duplicate groups and calculates the amount of wasted disk space.
+### 2. duplicates - Duplicate Detection
+
+It searches for files with identical content by calculating SHA-256 hashes using read streams, which avoids overloading system memory with large files. It displays information about duplicate groups and calculates the amount of wasted disk space.
 
 Syntax:
 
@@ -62,11 +64,12 @@ Example:
 node file-organizer.js duplicates "C:\Users\User\Downloads"
 ```
 
-3. organize - File Organization
-   Copies files from the source directory to the destination directory while preserving the originals, automatically sorting them into categories: Documents, Images, Archives, Code, Videos, and Other.
-   Small files (<10 MB) are copied using the system method.
-   Large files (≥10 MB) are copied using `stream/promises.pipeline()`.
-   In the event of a name conflict, files are automatically renamed using the pattern `file(1).pdf`, `file(2).pdf`.
+### 3. organize - File Organization
+
+Copies files from the source directory to the destination directory while preserving the originals, automatically sorting them into categories: Documents, Images, Archives, Code, Videos, and Other.
+Small files (<10 MB) are copied using the system method.
+Large files (≥10 MB) are copied using `stream/promises.pipeline()`.
+In the event of a name conflict, files are automatically renamed using the pattern `file(1).pdf`, `file(2).pdf`.
 
 Syntax:
 
@@ -80,8 +83,9 @@ Example:
 node file-organizer.js organize "C:\Users\User\Downloads" --output "C:\Users\User\Desktop\Organized"
 ```
 
-4. cleanup - Cleanup
-   Finds files older than a specified number of days (based on their last modification time (mtime)).
+### 4. cleanup - Cleanup
+
+Finds files older than a specified number of days (based on their last modification time (mtime)).
 
 Dry Run (default): without the `--confirm` flag, the utility simply lists the files matching the criteria and shows the total amount of disk space that would be freed.
 
@@ -91,13 +95,13 @@ node file-organizer.js cleanup "<path>" --older-than <number_of_days> [--confirm
 
 Example:
 
-### View-only (Dry run)
+#### View-only (Dry run)
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90
 ```
 
-### Actual removal
+#### Actual removal
 
 ```bash
 node file-organizer.js cleanup "C:\Users\User\Downloads" --older-than 90 --confirm
